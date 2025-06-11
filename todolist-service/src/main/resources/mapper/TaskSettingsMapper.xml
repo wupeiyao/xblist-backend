@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaowu.springboot.mapper.TaskSettingsMapper">
+    <insert id="addTaskSettings">
+        INSERT INTO `task_settings` (user_id,`setting1`, `setting2`, `setting3`,`setting4`,`setting5`)
+        VALUES (#{userId},0, 0, 0,0,0);
+    </insert>
+    <select id="selectByUserId" resultType="com.xiaowu.springboot.domain.TaskSettings">
+        SELECT * FROM `task_settings` where user_id = #{userId}
+    </select>
+    <select id="getAll" resultType="com.xiaowu.springboot.domain.TaskSettings">
+        select * from `task_settings`
+    </select>
+
+</mapper>

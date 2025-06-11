@@ -1,0 +1,79 @@
+server:
+  port: 8989
+  address: 0.0.0.0
+  servlet:
+    context-path: /
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/todo
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000 # 单位为毫秒，30秒
+      idle-timeout: 600000      # 空闲超时时间，10分钟
+      max-lifetime: 1800000     # 连接最大存活时间，30分钟
+      minimum-idle: 5           # 保持的最小空闲连接数
+      maximum-pool-size: 20     # 最大连接数
+
+  application:
+    name: todo-service-provider # 配置应用的名称
+
+  data:
+    redis:
+      password: 123456
+      host: 47.122.10.247
+      database: 0
+      port: 6379
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+xiaowu:
+  alioss:
+    endpoint: ${alioss.endpoint}
+    access-key-id: ${alioss.access-key-id}
+    access-key-secret: ${alioss.access-key-secret}
+    bucket-name: ${alioss.bucket-name}
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+  mapper-locations: classpath:/mapper/**/*.xml
+
+# 配置 Knife4j，以启用 Swagger 文档的增强功能和定制化展示
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+  api-docs:
+    path: /v3/api-docs
+
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.xiaowu.springboot.controller
+
+knife4j:
+  enable: true
+  production: false
+  setting:
+    language: zh_cn
+  basic:
+    enable: true
+    username: xiaowu
+    password: 123456
+
+
+

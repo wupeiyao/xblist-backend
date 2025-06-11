@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaowu.springboot.mapper.GroupTaskMapper">
+
+    <select id="getGroupTaskIds" resultType="java.lang.Long">
+        select group_id from Task_group where task_id in
+        <foreach collection="ids" item="taskId" separator="," open="(" close=")">
+            #{taskId}
+        </foreach>
+    </select>
+    <select id="getGroupTasks" resultType="com.xiaowu.springboot.domain.TaskGroup">
+        select * from task_group where group_id = #{group_id}
+    </select>
+</mapper>
